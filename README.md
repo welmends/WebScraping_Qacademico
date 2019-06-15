@@ -2,6 +2,11 @@
 
 ## Requirements
 
+### Install chromium - chromedriver
+```
+sudo apt install chromium-chromedriver
+```
+
 ### Install virtualenv via pip:
 ```
 pip install virtualenv
