@@ -7,6 +7,7 @@ import yaml
 import datetime
 
 def openQacademico(driver):
+    print('Open Qacademico..', end=' ')
     driver.get('https://qacademico.ifce.edu.br/qacademico/alunos')
 
     username = driver.find_element_by_id('txtLogin')
@@ -24,8 +25,9 @@ def openQacademico(driver):
     loginBtn.click()
 
     driver.get('https://qacademico.ifce.edu.br/qacademico/index.asp?t=2071')
+    print('OK')
 
-    return driver
+    return driver.page_source.count('Nota:')
 
 def updateQacademico(driver):
     driver.refresh()
@@ -39,8 +41,7 @@ if __name__ == '__main__':
     driver = webdriver.Chrome(executable_path='/usr/lib/chromium-browser/chromedriver', options=opt)
     notify = Notify()
 
-    openQacademico(driver)
-    lastValue = updateQacademico(driver)
+    lastValue = openQacademico(driver)
     aliveTrigger = 1
     thresh_time  = 60*15 # 15 minutes
 
