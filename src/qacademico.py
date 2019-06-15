@@ -2,15 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import yaml
 
-def openPage(driver):
-    # Get into qacademico 'alunos login' page
-    print('Open Qacademico..', end=' ')
-    driver.get('https://qacademico.ifce.edu.br/qacademico/alunos')
-
-    # Find elements of login and senha
-    username = driver.find_element_by_id('txtLogin')
-    password = driver.find_element_by_id('txtSenha')
-
+def loginOnPage(username, password):
     # Read credentials from credentials.yml
     with open("resources/credentials.yml", 'r') as stream:
         try:
@@ -20,6 +12,18 @@ def openPage(driver):
             password.send_keys(yamlData['credentials']['password'])
         except yaml.YAMLError as exc:
             print(exc)
+
+def openPage(driver):
+    # Get into qacademico 'alunos login' page
+    print('Open Qacademico..', end=' ')
+    driver.get('https://qacademico.ifce.edu.br/qacademico/alunos')
+
+    # Find elements of login and senha
+    username = driver.find_element_by_id('txtLogin')
+    password = driver.find_element_by_id('txtSenha')
+
+    # Login with credentials
+    loginOnPage(username, password)
 
     # Click to login into account
     loginBtn = driver.find_element_by_id("btnOk")
@@ -31,6 +35,7 @@ def openPage(driver):
 
     # Return how many grades has been posted
     return driver.page_source.count('Nota:')
+
 
 def updatePage(driver):
     # Refresh
