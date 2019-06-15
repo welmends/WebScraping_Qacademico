@@ -14,8 +14,8 @@ if __name__ == '__main__':
 
     # Open Page
     lastValue = qacademico.openPage(driver)
-    trigger_seconds = 5
     trigger = datetime.datetime.now()
+    trigger_seconds = 15*60 # 15 minutes
 
     # Service is running in loop..
     while True:

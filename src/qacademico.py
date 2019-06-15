@@ -13,6 +13,14 @@ def loginOnPage(username, password):
         except yaml.YAMLError as exc:
             print(exc)
 
+def getCountGrades(driver):
+    grades = driver.page_source.count('Nota:')
+    return grades
+
+def getGrades(driver):
+    grades = driver.page_source.count('Nota:')
+    return grades
+
 def openPage(driver):
     # Get into qacademico 'alunos login' page
     print('Open Qacademico..', end=' ')
@@ -33,9 +41,8 @@ def openPage(driver):
     driver.get('https://qacademico.ifce.edu.br/qacademico/index.asp?t=2071')
     print('OK')
 
-    # Return how many grades has been posted
-    return driver.page_source.count('Nota:')
-
+    # Return grades
+    return getCountGrades(driver)
 
 def updatePage(driver):
     # Refresh
@@ -45,5 +52,5 @@ def updatePage(driver):
     if(driver.current_url != 'https://qacademico.ifce.edu.br/qacademico/index.asp?t=2071'):
         driver = openQacademico(driver)
 
-    # Return how many grades has been posted
-    return driver.page_source.count('Nota:')
+    # Return grades
+    return getCountGrades(driver)
