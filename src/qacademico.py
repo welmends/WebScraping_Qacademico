@@ -61,15 +61,14 @@ def getGrades(driver):
                                 #print('N2: ', e_all.text[idx:idx+10])
                                 grades[len(grades)-1].append('N1: ' + e_all.text[idx:idx+10])
 
-    gradesStr = ''
+    gradesStr = '___NOTAS___\n'
     for grade in grades:
         for i in grade:
             if(i==grade[0]):
                 gradesStr += i + ':\n'
             else:
                 gradesStr+= '     ' + i + '\n'
-        gradesStr+='\n'
-        
+
     return gradesStr
 
 def openPage(driver):
