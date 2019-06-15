@@ -45,8 +45,10 @@ thresh_time  = 60*15 # 15 minutes
 
 while True:
     value = updateQacademico(driver)
-    strNota = 'NOTA NO ACADEMICO'
-    strAlive = 'NOTAS POSTADAS: ' + str(value)
+    now = datetime.datetime.now()
+    strDate = str(now.hour)+':'+str(now.minute)+':'+str(now.second)
+    strNota = strDate + ' - NOTA NO ACADEMICO'
+    strAlive = strDate + ' - NOTAS POSTADAS: ' + str(value)
 
     if(lastValue != value):
         print(strNota)
@@ -56,8 +58,7 @@ while True:
 
     if(aliveTrigger==thresh_time):
         print(strAlive)
-        now = datetime.datetime.now()
-        if(now.hour>7 and now.hour<23):
+        if(now.hour>=7 and now.hour<=23):
             notify.send(strAlive)
         aliveTrigger = 1
 
