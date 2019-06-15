@@ -16,6 +16,7 @@ if __name__ == '__main__':
     lastValue = qacademico.openPage(driver)
     trigger = datetime.datetime.now()
     trigger_seconds = 15*60 # 15 minutes
+    trigger_enable  = True
 
     # Service is running in loop..
     while True:
@@ -23,23 +24,23 @@ if __name__ == '__main__':
         value = qacademico.updatePage(driver)
         now = datetime.datetime.now()
         strDate = str(now.hour)+':'+str(now.minute)+':'+str(now.second)
-        strNota = strDate + ' - NOTA NO ACADEMICO'
+        strNota = strDate + ' - NOTA AGORA!'
         strAlive = strDate + ' - NOTAS POSTADAS: ' + str(value)
 
         # Notify if exists a new grade
         if(lastValue != value):
             trigger = datetime.datetime.now()
             print(strNota)
-            for i in range(2):
-                notify.send(strNota)
+            notify.send(strNota)
+            notify.send(qacademico.getGrades(driver))
             lastValue=value
 
         # Notify if trigger is activated
-        if(abs(now-trigger).total_seconds()>trigger_seconds):
+        if(trigger_enable and abs(now-trigger).total_seconds()>trigger_seconds):
             print(strAlive)
             if(now.hour>=7 and now.hour<=23):
-                for i in range(2):
-                    notify.send(strAlive)
+                notify.send(strAlive)
+                notify.send(qacademico.getGrades(driver))
             trigger = datetime.datetime.now()
 
         # Sleep
