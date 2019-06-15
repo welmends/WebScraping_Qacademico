@@ -33,34 +33,35 @@ def updateQacademico(driver):
         driver = openQacademico(driver)
     return driver.page_source.count('Nota:')
 
-opt = Options()
-opt.set_headless(True)
-driver = webdriver.Chrome(executable_path='/usr/lib/chromium-browser/chromedriver', options=opt)
-notify = Notify()
+if __name__ == '__main__':
+    opt = Options()
+    opt.set_headless(True)
+    driver = webdriver.Chrome(executable_path='/usr/lib/chromium-browser/chromedriver', options=opt)
+    notify = Notify()
 
-openQacademico(driver)
-lastValue = updateQacademico(driver)
-aliveTrigger = 1
-thresh_time  = 60*15 # 15 minutes
+    openQacademico(driver)
+    lastValue = updateQacademico(driver)
+    aliveTrigger = 1
+    thresh_time  = 60*15 # 15 minutes
 
-while True:
-    value = updateQacademico(driver)
-    now = datetime.datetime.now()
-    strDate = str(now.hour)+':'+str(now.minute)+':'+str(now.second)
-    strNota = strDate + ' - NOTA NO ACADEMICO'
-    strAlive = strDate + ' - NOTAS POSTADAS: ' + str(value)
+    while True:
+        value = updateQacademico(driver)
+        now = datetime.datetime.now()
+        strDate = str(now.hour)+':'+str(now.minute)+':'+str(now.second)
+        strNota = strDate + ' - NOTA NO ACADEMICO'
+        strAlive = strDate + ' - NOTAS POSTADAS: ' + str(value)
 
-    if(lastValue != value):
-        print(strNota)
-        notify.send(strNota)
-        lastValue=value
-        aliveTrigger = 1
+        if(lastValue != value):
+            print(strNota)
+            notify.send(strNota)
+            lastValue=value
+            aliveTrigger = 1
 
-    if(aliveTrigger==thresh_time):
-        print(strAlive)
-        if(now.hour>=7 and now.hour<=23):
-            notify.send(strAlive)
-        aliveTrigger = 1
+        if(aliveTrigger==thresh_time):
+            print(strAlive)
+            if(now.hour>=7 and now.hour<=23):
+                notify.send(strAlive)
+            aliveTrigger = 1
 
-    aliveTrigger+=1
-    time.sleep(1)
+        aliveTrigger+=1
+        time.sleep(1)
