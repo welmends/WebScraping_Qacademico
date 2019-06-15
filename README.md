@@ -1,4 +1,4 @@
-# Web Scraping
+# Web Scraping - Qacademico
 
 ## Requirements
 
@@ -19,7 +19,7 @@ virtualenv --version
 
 ### Create the virtualenv for the project:
 ```
-cd WebScraping\
+cd WebScraping_Qacademico/
 virtualenv .env -p python3 --no-site-packages
 ```
 
@@ -34,6 +34,11 @@ pip3 install -r resources/requirements.txt
 ```
 
 ## Running
+
+### Register your Android Smartphone on notify.run:
+```
+notify-run register
+```
 
 ### Put your credentials on resources/credentials.yml, following the example:
 ```
