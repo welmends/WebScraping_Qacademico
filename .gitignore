@@ -2,3 +2,4 @@
 ############
 
 resources/credentials.yml
+src/__pycache__
