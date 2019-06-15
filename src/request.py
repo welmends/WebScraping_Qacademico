@@ -4,6 +4,7 @@ from selenium.webdriver.chrome.options import Options
 from notify_run import Notify
 import time
 import yaml
+import datetime
 
 def openQacademico(driver):
     driver.get('https://qacademico.ifce.edu.br/qacademico/alunos')
@@ -40,7 +41,7 @@ notify = Notify()
 openQacademico(driver)
 lastValue = updateQacademico(driver)
 aliveTrigger = 1
-thresh_time  = 60
+thresh_time  = 60*15 # 15 minutes
 
 while True:
     value = updateQacademico(driver)
@@ -55,7 +56,9 @@ while True:
 
     if(aliveTrigger==thresh_time):
         print(strAlive)
-        notify.send(strAlive)
+        now = datetime.datetime.now()
+        if(now.hour>7 and now.hour<23):
+            notify.send(strAlive)
         aliveTrigger = 1
 
     aliveTrigger+=1
