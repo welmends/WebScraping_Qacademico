@@ -1,4 +1,5 @@
 # Web Scraping - Qacademico
+Receive notifications directly on your smartphone about your grades on Qacademico.
 
 ## Requirements
 
