@@ -30,6 +30,13 @@ pip3 install -r resources/requirements.txt
 
 ## Running
 
+### Put your credentials on resources/credentials.yml, following the example:
+```
+credentials:
+  username: xxxx
+  password: xxxx
+```
+
 ### Run the code:
 ```
 python3 src/init.py
