@@ -32,7 +32,6 @@ if __name__ == '__main__':
             trigger = datetime.datetime.now()
             print(strNota)
             notify.send(strNota)
-            notify.send(qacademico.getGrades(driver))
             lastValue=value
 
         # Notify if trigger is activated
@@ -40,7 +39,6 @@ if __name__ == '__main__':
             print(strAlive)
             if(now.hour>=7 and now.hour<=23):
                 notify.send(strAlive)
-                notify.send(qacademico.getGrades(driver))
             trigger = datetime.datetime.now()
 
         # Sleep
