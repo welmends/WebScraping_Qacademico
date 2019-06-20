@@ -24,8 +24,8 @@ if __name__ == '__main__':
         value = qacademico.updatePage(driver)
         now = datetime.datetime.now()
         strDate = str(now.hour)+':'+str(now.minute)+':'+str(now.second)
-        strNota = strDate + ' - NOTA AGORA!'
-        strAlive = strDate + ' - NOTAS POSTADAS: ' + str(value)
+        strNota = strDate + ' - (NEW) NOTAS POSTADAS:' + str(value)
+        strAlive = strDate + ' - (OLD) NOTAS POSTADAS: ' + str(value)
 
         # Notify if exists a new grade
         if(lastValue != value):
