@@ -100,7 +100,8 @@ def updatePage(driver):
 
     # If the page was closed, open the page again
     if(driver.current_url != 'https://qacademico.ifce.edu.br/qacademico/index.asp?t=2071'):
-        driver = openQacademico(driver)
-
-    # Return grades
-    return getCountGrades(driver)
+        # Return grades
+        return openPage(driver)
+    else:
+        # Return grades
+        return getCountGrades(driver)
